@@ -54,7 +54,7 @@ def user_presence(rb, uid) -> dict:
     users = rb.get_user_presence(uid).get("userPresences")
 
     if not users:
-        sys.exit("Error: invalid user")
+        sys.exit("Error: invalid auth")
 
     return users[0]
 
