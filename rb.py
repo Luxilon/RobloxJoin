@@ -46,7 +46,7 @@ class RobloxAPI:
         kwargs.update({ "headers": { "X-CSRF-TOKEN": self.csrf_token() } })
         return self.sess.post(url, data, json, **kwargs)
 
-    def get_user_presence(self, *args) -> dict:
+    def get_user_presence(self, *args) -> list:
         return self.post_with_token("https://presence.roblox.com/v1/presence/users", json={ "userIds": args }).json()
 
 
