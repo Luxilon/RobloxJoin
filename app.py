@@ -88,7 +88,6 @@ def init():
         if user["userPresenceType"] == 2:
             auth = rb.game_authentication(place_id)
             load_player(auth, place_id, game_id)
-
             break
 
 if __name__ == "__main__":
