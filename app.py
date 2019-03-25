@@ -60,9 +60,7 @@ def user_presence(rb, uid) -> dict:
 
 def player_path() -> str:  
     version = RobloxAPI.player_version()
-    roblox = path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher.exe")
-    
-    return roblox
+    return path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher.exe")
 
 def load_player(auth, place_id, game_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}&gameId={game_id}")
@@ -88,6 +86,7 @@ def init():
         if user["userPresenceType"] == 2:
             auth = rb.game_authentication(place_id)
             load_player(auth, place_id, game_id)
+            
             break
 
 if __name__ == "__main__":
