@@ -1,4 +1,4 @@
-[![PyPI](https://img.shields.io/badge/Python-2.7-blue.svg)]()
+[![PyPI](https://img.shields.io/badge/Python-3.7-blue.svg)]()
 
 # RobloxJoin
 Instantly join users Roblox game.
