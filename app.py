@@ -23,10 +23,8 @@ class RobloxAPI:
         
     @staticmethod
     def csrf_token() -> str:
-        resp = requests.get("https://www.roblox.com")
-        regex = r"(?<=Roblox.XsrfToken.setToken\(')\S{12}"
-        
-        return search(regex, resp.text).group()
+        resp = requests.post("https://auth.roblox.com/v2/login")
+        return resp.headers["X-CSRF-TOKEN"]
 
     @staticmethod
     def player_version() -> str:
