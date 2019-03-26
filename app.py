@@ -62,7 +62,7 @@ def user_presence(rb, uid) -> dict:
 
 def player_path() -> str:  
     version = rb.player_version()
-    return path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher_main.exe")
+    return path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher.exe")
 
 def load_player(auth, place_id, game_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}&gameId={game_id}")
