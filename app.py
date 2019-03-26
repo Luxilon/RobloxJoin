@@ -39,7 +39,8 @@ class RobloxAPI:
         return resp.json()
 
     def game_authentication(self, place_id) -> str:
-        resp = self.sess.get("https://www.roblox.com/game-auth/getauthticket", headers={ "RBX-For-Gameauth": "true", "Referer": "https://www.roblox.com/games/{game_id}" })
+        resp = self.sess.get("https://www.roblox.com/game-auth/getauthticket", headers={ "RBX-For-Gameauth": "true", 
+                                                                                         "Referer": "https://www.roblox.com/games/{game_id}" })
         return resp.text
 
     def post_with_token(self, url, data=None, json=None, **kwargs) -> requests.Response:
