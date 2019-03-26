@@ -4,7 +4,6 @@
 import sys, requests
 
 from os import path
-from re import search
 
 from subprocess import Popen
 from urllib.parse import quote
@@ -65,8 +64,11 @@ def load_player(auth, place_id, game_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}&gameId={game_id}")
     arg = f"roblox-player:1+launchmode:play+gameinfo:{auth}+placelauncherurl:{url}"
     
-    Popen([ player_path(), arg ], shell=False)
-
+    try:
+        Popen([ player_path(), arg ], shell=False)
+    except FileNotFoundError:
+        sys.exit("Error: latest version of Roblox not found")
+        
 def init():
     rb = RobloxAPI(COOKIE)
     user = input("Enter username: ")
