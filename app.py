@@ -4,11 +4,10 @@
 import sys, requests
 
 from os import path
+from enum import Enum, unique
 
 from subprocess import Popen
 from urllib.parse import quote
-
-ROBLOX_SEC = "ENTER_ROBLOSECURITY_HERE"
 
 class RobloxAPI:
     def __init__(self, cookie):
@@ -46,6 +45,13 @@ class RobloxAPI:
         return self.post_with_token("https://presence.roblox.com/v1/presence/users", json={ "userIds": args }).json()
 
 
+@unique
+class Status(Enum):
+    OFFLINE = 0
+    ONLINE = 1
+    PLAYING = 2
+
+
 def user_presence(rb, uid) -> dict:
     users = rb.get_user_presence(uid).get("userPresences")
 
@@ -55,8 +61,8 @@ def user_presence(rb, uid) -> dict:
     return users[0]
 
 def player_path() -> str:  
-    version = RobloxAPI.player_version()
-    return path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher.exe")
+    version = "version-51af58558ffe4ab3"
+    return path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher_main.exe")
 
 def load_player(auth, place_id, game_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}&gameId={game_id}")
@@ -67,26 +73,37 @@ def load_player(auth, place_id, game_id):
     except FileNotFoundError:
         sys.exit("Error: latest version of Roblox not found")
 
-def init():
-    rb = RobloxAPI(ROBLOX_SEC)
-    user = input("Enter username: ")
+def join_game(rb, place_id, game_id) -> bool:
+    auth = rb.game_authentication(place_id)
+    load_player(auth, place_id, game_id)
 
+    return True
+
+def init():
+    cookie = input("Enter ROBLOSECURITY: ")
+    rb = RobloxAPI(cookie)
+
+    user = input("Enter username: ")
     uid = rb.username_info(user).get("Id")
 
     if not uid:
         sys.exit("Error: user name not found")
 
     while True:
-        user = user_presence(rb, uid)
+        info = user_presence(rb, uid)
 
-        place_id = user["rootPlaceId"]
-        game_id = user["gameId"]
+        place_id = info["rootPlaceId"]
+        game_id = info["gameId"]
 
-        if user["userPresenceType"] == 2:
-            auth = rb.game_authentication(place_id)
-            load_player(auth, place_id, game_id)
+        status = info["userPresenceType"]
 
-            break
+        print(f"[User: <{user}> => {Status(status)}]")
+
+        if status == 2:
+            joinable = join_game(rb, place_id, game_id)
+
+            if joinable:
+                break
 
 if __name__ == "__main__":
     init()
