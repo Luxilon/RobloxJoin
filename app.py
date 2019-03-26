@@ -100,9 +100,7 @@ def init():
         print(f"[User: <{user}> => {Status(status)}]")
 
         if status == 2:
-            joinable = join_game(rb, place_id, game_id)
-
-            if joinable:
+            if join_game(rb, place_id, game_id):
                 break
 
 if __name__ == "__main__":
