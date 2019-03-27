@@ -17,8 +17,8 @@ Firstly install the required modules by using the command.
     
 Secondly get the <code>.ROBLOSECURITY</code> value by using a cookie manager extension such as http://www.editthiscookie.com/.
 
-Next go to the roblox website (inorder to view its cookies). Open up editthiscookie and copy the <code>.ROBLOSECURITY</code> value of the cookie.
+Next go to the roblox website (inorder to view its cookies). Open up <b>editthiscookie</b> and copy the <code>.ROBLOSECURITY</code> value of the cookie.
 
 ![Screenshot](/screenshots/value.png)
 
-Finally paste your roblox cookie into the RobloxJoin program, enter the users username and that's it. The program will wait until the user joins a gamr
+Finally paste your roblox cookie into the <b>RobloxJoin</b> program, enter the users username and that's it. The program will wait until the user joins a game.
