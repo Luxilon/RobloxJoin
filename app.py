@@ -1,15 +1,14 @@
-# h4zey
 # -*- coding: utf-8 -*-
 
 import sys, requests
 
 from glob import glob
+
 from os.path import expandvars
+from urllib.parse import quote
 
 from enum import IntEnum, unique
-
 from subprocess import Popen
-from urllib.parse import quote
 
 class RobloxAPI:
     def __init__(self, cookie):
