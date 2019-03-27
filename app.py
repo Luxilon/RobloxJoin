@@ -14,6 +14,8 @@ class RobloxAPI:
         self.sess = requests.Session()
         self.sess.cookies[".ROBLOSECURITY"] = cookie
         
+        requests.urllib3.disable_warnings()
+
     @staticmethod
     def csrf_token() -> str:
         resp = requests.post("https://auth.roblox.com/v2/login")
@@ -21,7 +23,7 @@ class RobloxAPI:
 
     @staticmethod
     def player_version() -> str:
-        resp = requests.get("https://setup.roblox.com/version")
+        resp = requests.get("https://setup.roblox.com/version", verify=False)
         return resp.text
 
     @staticmethod
@@ -58,7 +60,7 @@ def user_presence(rb, uid) -> dict:
     return users[0]
 
 def player_path() -> str:  
-    version = rb.player_version()
+    version = RobloxAPI.player_version()
     return path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher.exe")
 
 def load_player(auth, place_id, game_id):
