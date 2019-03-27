@@ -60,7 +60,7 @@ def user_presence(rb, uid) -> dict:
     return users[0]
 
 def player_path() -> str:  
-    version = "version-51af58558ffe4ab3" # RobloxAPI.player_version()
+    version = RobloxAPI.player_version()
     return path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher.exe")
 
 def load_player(auth, place_id, game_id):
