@@ -1,4 +1,3 @@
-# h4zey
 # -*- coding: utf-8 -*-
 
 import sys, requests
