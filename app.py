@@ -1,3 +1,4 @@
+# h4zey
 # -*- coding: utf-8 -*-
 
 import sys, requests
@@ -5,7 +6,7 @@ import sys, requests
 from glob import glob
 from os.path import expandvars
 
-from enum import Enum, unique
+from enum import IntEnum, unique
 
 from subprocess import Popen
 from urllib.parse import quote
@@ -39,7 +40,7 @@ class RobloxAPI:
 
 
 @unique
-class Status(Enum):
+class Status(IntEnum):
     OFFLINE = 0
     ONLINE = 1
     PLAYING = 2
@@ -92,9 +93,9 @@ def init():
 
         status = info["userPresenceType"]
 
-        print(f"[User: <{user}> => {Status(status)}]")
+        print(f"[User: <{user}> => {Status(status).name}]")
 
-        if status == 2:
+        if status == Status.PLAYING:
             if join_game(rb, place_id, game_id):
                 break
 
