@@ -16,8 +16,6 @@ class RobloxAPI:
         self.sess = requests.Session()
         self.sess.cookies[".ROBLOSECURITY"] = cookie
         
-        requests.urllib3.disable_warnings()
-
     @staticmethod
     def csrf_token() -> str:
         resp = requests.post("https://auth.roblox.com/v2/login")
