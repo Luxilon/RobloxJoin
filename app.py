@@ -15,8 +15,6 @@ class RobloxAPI:
     def __init__(self, cookie):
         self.sess = requests.Session()
         self.sess.cookies[".ROBLOSECURITY"] = cookie
-        
-        requests.urllib3.disable_warnings()
 
     @staticmethod
     def csrf_token() -> str:
