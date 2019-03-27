@@ -3,7 +3,9 @@
 
 import sys, requests
 
-from os import path
+from glob import glob
+from os.path import expandvars
+
 from enum import Enum, unique
 
 from subprocess import Popen
@@ -20,11 +22,6 @@ class RobloxAPI:
     def csrf_token() -> str:
         resp = requests.post("https://auth.roblox.com/v2/login")
         return resp.headers["X-CSRF-TOKEN"]
-
-    @staticmethod
-    def player_version() -> str:
-        resp = requests.get("https://setup.roblox.com/version", verify=False)
-        return resp.text
 
     @staticmethod
     def username_info(user) -> dict:
@@ -59,9 +56,11 @@ def user_presence(rb, uid) -> dict:
 
     return users[0]
 
-def player_path() -> str:  
-    version = RobloxAPI.player_version()
-    return path.expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions\\{version}\\RobloxPlayerLauncher.exe")
+def player_path() -> str:
+    roblox = expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions")
+
+    for f in glob(f"{roblox}\\**\\RobloxPlayerLauncher.exe"):
+        return f
 
 def load_player(auth, place_id, game_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}&gameId={game_id}")
@@ -103,4 +102,4 @@ def init():
                 break
 
 if __name__ == "__main__":
-    init()
+    print(player_path())
