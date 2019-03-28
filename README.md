@@ -3,7 +3,7 @@
 # RobloxJoin
 Instantly join users Roblox game.
 
-With this python script you can join a users Roblox game as soon as they join. This can be helpful to get into live streamed games. To use, run the tool and enter your roblox cookie and then the users username. This tool will wait until the user enters a game, as soon as the user joins a game it will launch roblox and join.
+With this python script you can join a users Roblox game as soon as they enter and is really useful to get into live streamed games. Run the tool and enter your roblox cookie and the users username. <b>RobloxJoin</b> will wait until the user enters a game and as soon as the user joins a game it will launch roblox and join.
 
 Dependencies
 =
