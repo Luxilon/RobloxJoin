@@ -2,7 +2,7 @@
 
 import sys, requests
 
-from glob import glob
+from glob import iglob
 
 from os.path import expandvars
 from urllib.parse import quote
@@ -55,9 +55,7 @@ def user_presence(rb, uid) -> dict:
 
 def player_path() -> str:
     path = expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions")
-
-    for f in glob(f"{path}\\**\\RobloxPlayerLauncher.exe"):
-        return f
+    return next(iglob(f"{path}\\**\\RobloxPlayerLauncher.exe"))
 
 def load_player(auth, place_id, game_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}&gameId={game_id}")
