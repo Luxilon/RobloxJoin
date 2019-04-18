@@ -54,7 +54,7 @@ def user_presence(rb, uid) -> dict:
     return users[0]
 
 def player_path() -> str:
-    path = expandvars(f"%LOCALAPPDATA%\\Roblox\\Versions")
+    path = expandvars("%LOCALAPPDATA%\\Roblox\\Versions")
     return next(iglob(f"{path}\\**\\RobloxPlayerLauncher.exe"))
 
 def load_player(auth, place_id, game_id):
