@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import sys, requests
+import sys
+import requests
 
 from glob import iglob
 
